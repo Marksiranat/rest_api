@@ -13,7 +13,10 @@ const books = require("./db");
 app.get("/books", (req, res) => {
   res.json(books);
 });
-
+app.put('/books/:id', (req, res) => {
+    const updateIndex = books.findIndex(book => book.id === req.params.id)
+    res.json(Object.assign(books[updateIndex], req.body))
+  })
 app.get("/books/:id", (req, res) => {
   res.json(books.find((book) => book.id === req.params.id));
 });
